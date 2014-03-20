@@ -123,16 +123,6 @@ static int find_do_edit_file (WButton * button, int action);
 /* Parsed ignore dirs */
 static char **find_ignore_dirs = NULL;
 
-/* Size of the find parameters window */
-#ifdef HAVE_CHARSET
-static int FIND_Y = 19;
-#else
-static int FIND_Y = 18;
-#endif
-static int FIND_X = 68;
-
-static int FIND2_X = 64;
-
 /* static variables to remember find parameters */
 static WInput *in_start;        /* Start path */
 static WInput *in_name;         /* Filename */
@@ -554,7 +544,6 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     int cw;
 
     gboolean disable;
-    int cbox_position;
 
 #ifdef ENABLE_NLS
     {
@@ -676,9 +665,8 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 
     content_use_cbox = check_new (y2++, x2, options.content_use, content_use_label);
     add_widget (find_dlg, content_use_cbox);
-    cbox_position = FIND_Y - 5;
 
-    only_directories_cbox = check_new (cbox_position--, 3, options.only_directories, file_only_directories_label);
+    only_directories_cbox = check_new (y1++, x1, options.only_directories, file_only_directories_label);
     add_widget (find_dlg, only_directories_cbox);
 
     /* Continue 1st column */
